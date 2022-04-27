@@ -1,2 +1,2 @@
-# herzenschein-nix-config
+# herz-nix-config
 A simple nix configuration file.
