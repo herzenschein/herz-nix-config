@@ -14,16 +14,26 @@
   #==== Desktop ====#
 
   #1111 PLASMA     1111#
-  users.users.blu = {
+  users.users.blumen = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
   };
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
+  #services.xserver.displayManager.sddm.enable = true;
+  #services.xserver.displayManager.sddm.settings =
+  #{
+  #  Default =
+  #  {
+  #    DisplayServer = "wayland";
+  #  };
+  #};
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
+  services.xserver.displayManager.defaultSession = "plasmawayland";
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.desktopManager.plasma5.runUsingSystemd = true;
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "blu";
+  #services.xserver.displayManager.autoLogin.enable = true;
+  #services.xserver.displayManager.autoLogin.user = "blumen";
   xdg.portal.enable = true;
   xdg.portal.gtkUsePortal = true;
   services.xserver.libinput.enable = true;
@@ -55,6 +65,7 @@
   networking.useDHCP = false;
   networking.interfaces.enp3s0.useDHCP = true;
   networking.interfaces.wlp2s0.useDHCP = true;
+  networking.networkmanager.wifi.powersave = false;
 
   services.localtime.enable = true;
 
@@ -83,6 +94,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  systemd.extraConfig = "DefaultTimeoutStopSec=10s";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
